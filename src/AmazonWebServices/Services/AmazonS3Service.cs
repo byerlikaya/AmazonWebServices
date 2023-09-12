@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AmazonWebServices.Services
 {
-    internal class AmazonS3Service : IFileService
+    internal class AmazonS3Service : IAmazonS3Service
     {
         private readonly AmazonS3Client _amazonS3Client;
         private readonly AmazonS3Options _amazonS3Options;

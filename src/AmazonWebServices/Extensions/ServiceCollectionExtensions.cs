@@ -5,11 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AmazonWebServices.Extensions
 {
-    internal static class ServiceCollectionExtensions
+    public static class ServiceCollectionExtensions
     {
         public static void AddAmazonWebServices(this IServiceCollection services)
         {
-            services.AddSingleton<IFileService, AmazonS3Service>();
+            services.AddSingleton<IAmazonS3Service, AmazonS3Service>();
             ServiceTool.Create(services);
         }
     }

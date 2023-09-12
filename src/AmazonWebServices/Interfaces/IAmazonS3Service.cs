@@ -2,7 +2,7 @@
 
 namespace AmazonWebServices.Interfaces
 {
-    internal interface IFileService
+    public interface IAmazonS3Service
     {
         Task<string> UploadAsync(UploadObjectRequest updaObjectRequest, bool addTimeStamp = false);
 
