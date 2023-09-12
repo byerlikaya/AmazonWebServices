@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PackageId>AmazonWebServices</PackageId>
+    <Title>Amazon Web Services</Title>
+    <Version>1.0.0</Version>
+    <Authors>Barış Yerlikaya</Authors>
+    <Company>Barış Yerlikaya</Company>
+    <Product>Amazon Web Services</Product>
+    <Copyright>Copyright (c) 2023 Barış Yerlikaya</Copyright>
+    <PackageProjectUrl>https://github.com/byerlikaya/AmazonWebServices</PackageProjectUrl>
+    <PackageIcon></PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/byerlikaya/AmazonWebServices</RepositoryUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <PackageReference Include="AWSSDK.S3" Version="3.7.203.12" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>
