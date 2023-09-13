@@ -15,6 +15,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/byerlikaya/AmazonWebServices</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Description>It offers simple yet effective methods for Amazon S3 and Simple Email Service.</Description>
   </PropertyGroup>
 
   <ItemGroup>

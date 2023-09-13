@@ -20,7 +20,6 @@ Global
 		{5B6FD088-E09F-45C3-8DE1-B10BAB04206F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B6FD088-E09F-45C3-8DE1-B10BAB04206F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B6FD088-E09F-45C3-8DE1-B10BAB04206F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B6FD088-E09F-45C3-8DE1-B10BAB04206F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

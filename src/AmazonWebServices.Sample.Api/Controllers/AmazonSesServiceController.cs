@@ -20,19 +20,7 @@ namespace AmazonWebServices.Sample.Api.Controllers
         [HttpPost("/sendEmail")]
         public async Task<IActionResult> SendEmail(SendEmailRequest sendEmailRequest)
         {
-            await _amazonSesService.SendEMail(new SendEmailRequest
-            {
-                Subject = sendEmailRequest.Subject,
-                Body = sendEmailRequest.Body,
-                Destination = new Destination
-                {
-                    BccAddresses = sendEmailRequest.Destination.BccAddresses,
-                    CcAddresses = sendEmailRequest.Destination.CcAddresses,
-                    ToAddresses = sendEmailRequest.Destination.ToAddresses
-                },
-                DisplayName = sendEmailRequest.DisplayName,
-                Source = sendEmailRequest.Source
-            });
+            await _amazonSesService.SendEMail(sendEmailRequest);
 
             return Ok();
         }
@@ -40,22 +28,9 @@ namespace AmazonWebServices.Sample.Api.Controllers
         [Consumes("multipart/form-data")]
         [Produces("multipart/form-data", "application/json")]
         [HttpPost("/sendSmtpEmail")]
-        public async Task<IActionResult> SendSmtpEmail(SendSmtpEmailRequest sendEmailRequest)
+        public async Task<IActionResult> SendSmtpEmail(SendSmtpEmailRequest sendSmtpEmailRequest)
         {
-            await _amazonSesService.SendSmtpEMail(new SendSmtpEmailRequest
-            {
-                Subject = sendEmailRequest.Subject,
-                Body = sendEmailRequest.Body,
-                Destination = new Destination
-                {
-                    BccAddresses = sendEmailRequest.Destination.BccAddresses,
-                    CcAddresses = sendEmailRequest.Destination.CcAddresses,
-                    ToAddresses = sendEmailRequest.Destination.ToAddresses
-                },
-                DisplayName = sendEmailRequest.DisplayName,
-                Source = sendEmailRequest.Source,
-                Attachments = sendEmailRequest.Attachments
-            });
+            await _amazonSesService.SendSmtpEMail(sendSmtpEmailRequest);
 
             return Ok();
         }
