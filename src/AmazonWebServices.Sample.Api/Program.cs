@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen(x =>
     x.OperationFilter<FileUploadOperationFilter>();
 });
 
+//If you want to use Amazon services, you need to add them to the container.
 builder.Services.AddAmazonWebServices();
 
 var app = builder.Build();
@@ -22,7 +23,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(x =>
+    {
+        x.DefaultModelsExpandDepth(-1);
+    });
 }
 
 app.UseHttpsRedirection();
