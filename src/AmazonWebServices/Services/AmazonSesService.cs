@@ -8,8 +8,10 @@ using AmazonWebServices.Utilities;
 using CsQuery.ExtensionMethods.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace AmazonWebServices.Services
 {

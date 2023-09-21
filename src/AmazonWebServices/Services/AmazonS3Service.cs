@@ -9,6 +9,9 @@ using AmazonWebServices.Requests;
 using AmazonWebServices.Utilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace AmazonWebServices.Services
 {
