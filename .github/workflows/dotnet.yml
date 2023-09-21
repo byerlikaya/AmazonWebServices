@@ -22,7 +22,7 @@ jobs:
         dotnet-version: 6.0.x
         source-url: https://nuget.pkg.github.com/${{github.repository_owner}}/index.json
       env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}     
+          NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}     
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -34,4 +34,4 @@ jobs:
     - name: PushGithub
       run: dotnet nuget push ./packages/*.nupkg --skip-duplicate
       env:
-       NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+       NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
