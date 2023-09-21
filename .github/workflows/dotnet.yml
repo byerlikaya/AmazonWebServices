@@ -32,6 +32,4 @@ jobs:
     - name: dotnet pack
       run: dotnet pack -c Release -o packages
     - name: PushGithub
-      run: dotnet nuget push ./packages/*.nupkg --skip-duplicate
-      env:
-       NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
+      run: dotnet nuget push ./packages/*.nupkg --skip-duplicate --api-key ${{ secrets.NUGET_AUTH_TOKEN }}
