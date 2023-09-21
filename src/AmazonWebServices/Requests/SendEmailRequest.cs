@@ -1,4 +1,6 @@
-﻿namespace AmazonWebServices.Requests
+﻿using System.Collections.Generic;
+
+namespace AmazonWebServices.Requests
 {
     public class SendEmailRequest
     {

@@ -1,4 +1,5 @@
 ﻿using AmazonWebServices.Requests;
+using System.Threading.Tasks;
 
 namespace AmazonWebServices.Interfaces
 {

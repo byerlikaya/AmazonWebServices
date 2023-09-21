@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <PackageId>AmazonWebServices</PackageId>
     <Title>Amazon Web Services</Title>
-    <Version>1.0.0</Version>
+    <Version>1.0.2</Version>
     <Authors>Barış Yerlikaya</Authors>
     <Company>Barış Yerlikaya</Company>
     <Product>Amazon Web Services</Product>
@@ -16,10 +15,12 @@
     <RepositoryUrl>https://github.com/byerlikaya/AmazonWebServices</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Description>It offers simple yet effective methods for Amazon S3 and Simple Email Service.</Description>
+    <PackageTags>AWS Amazon S3 S3Control SES aws-sdk awsdotnet AmazonWebServices</PackageTags>
+    <LangVersion>latest</LangVersion>
+    <RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <None Include="..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -28,9 +29,10 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <PackageReference Include="AWSSDK.S3" Version="3.7.203.15" />
-    <PackageReference Include="AWSSDK.SimpleEmail" Version="3.7.200.40" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.204" />
+    <PackageReference Include="AWSSDK.SimpleEmail" Version="3.7.200.43" />
     <PackageReference Include="CsQuery.NETStandard" Version="1.3.6.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.34" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
