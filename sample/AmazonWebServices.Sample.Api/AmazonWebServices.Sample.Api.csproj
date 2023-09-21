@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AmazonWebServices\AmazonWebServices.csproj" />
+    <ProjectReference Include="..\..\src\AmazonWebServices\AmazonWebServices.csproj" />
   </ItemGroup>
 
 </Project>
