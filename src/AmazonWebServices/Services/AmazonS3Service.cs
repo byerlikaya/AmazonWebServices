@@ -39,10 +39,38 @@ namespace AmazonWebServices.Services
         {
             uploadObjectRequest.File.Verify();
 
+            var (folderName, fileName) = GetFolderAndFileName(uploadObjectRequest, addTimeStamp);
+
+            await using var newMemoryStream = new MemoryStream();
+            await uploadObjectRequest.File.CopyToAsync(newMemoryStream);
+
+            var uploadRequest = new TransferUtilityUploadRequest
+            {
+                InputStream = newMemoryStream,
+                Key = GetKey(folderName, fileName),
+                BucketName = _amazonS3Options.BucketName,
+                CannedACL = S3CannedACL.PublicRead
+            };
+
+            using var fileTransferUtility = new TransferUtility(_amazonS3Client);
+            await fileTransferUtility.UploadAsync(uploadRequest);
+
+            return GetUploadedFileName(uploadObjectRequest, folderName, fileName);
+        }
+
+        public async Task DeleteAsync(string fileName, string folderName = null) =>
+            await _amazonS3Client.DeleteObjectAsync(new DeleteObjectRequest
+            {
+                BucketName = _amazonS3Options.BucketName,
+                Key = GetKey(folderName, fileName)
+            });
+
+        private static (string folderName, string fileName) GetFolderAndFileName(UploadObjectRequest uploadObjectRequest, bool addTimeStamp)
+        {
             var fileName = uploadObjectRequest.File.FileName;
 
             var extension = Path.GetExtension(fileName).ToLowerInvariant();
-            var currentFileName = fileName.Replace(extension, string.Empty);
+            var currentFileName = fileName.ToLowerInvariant().Replace(extension, string.Empty);
 
             if (addTimeStamp)
             {
@@ -59,43 +87,21 @@ namespace AmazonWebServices.Services
                     : $"{uploadObjectRequest.FileName.ClearSpecialCharacters()}{extension}";
             }
 
-            await using var newMemoryStream = new MemoryStream();
-            await uploadObjectRequest.File.CopyToAsync(newMemoryStream);
-
             var folderName = string.IsNullOrEmpty(uploadObjectRequest.FolderName)
                 ? string.Empty
                 : uploadObjectRequest.FolderName.Trim();
 
-            var uploadRequest = new TransferUtilityUploadRequest
-            {
-                InputStream = newMemoryStream,
-                Key = string.IsNullOrEmpty(folderName)
-                    ? fileName
-                    : $"{folderName}/{fileName}",
-                BucketName = _amazonS3Options.BucketName,
-                CannedACL = S3CannedACL.PublicRead
-            };
+            return (folderName, fileName);
+        }
 
-            using var fileTransferUtility = new TransferUtility(_amazonS3Client);
-
-            await fileTransferUtility.UploadAsync(uploadRequest);
-
-            return string.IsNullOrEmpty(uploadObjectRequest.FolderName)
+        private static string GetKey(string folderName, string fileName) =>
+            string.IsNullOrEmpty(folderName)
                 ? fileName
-                : $"{uploadObjectRequest.FolderName}/{fileName}";
-        }
+                : $"{folderName}/{fileName}";
 
-        public async Task DeleteAsync(string fileName, string folderName = null)
-        {
-            var deleteRequest = new DeleteObjectRequest
-            {
-                BucketName = _amazonS3Options.BucketName,
-                Key = string.IsNullOrEmpty(folderName)
-                    ? fileName
-                    : $"{folderName}/{fileName}"
-            };
-
-            await _amazonS3Client.DeleteObjectAsync(deleteRequest);
-        }
+        private static string GetUploadedFileName(UploadObjectRequest uploadObjectRequest, string folderName, string fileName) =>
+            string.IsNullOrEmpty(uploadObjectRequest.FolderName)
+                ? fileName
+                : $"{uploadObjectRequest.FolderName}/{folderName}";
     }
 }
