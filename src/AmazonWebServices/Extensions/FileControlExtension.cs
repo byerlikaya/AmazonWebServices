@@ -70,29 +70,29 @@ namespace AmazonWebServices.Extensions
 
         private static bool SignatureControl(this IFormFile file)
         {
-            var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+            var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
 
-            if (ext.Equals(".svg"))
+            if (extension.Equals(".svg"))
                 return file.IsSvgFile();
 
-            using var reader = new BinaryReader(file.OpenReadStream());
+            using var binaryReader = new BinaryReader(file.OpenReadStream());
 
-            var signatures = FileSignatures[ext];
+            var signatures = FileSignatures[extension];
 
-            var headerBytes = reader.ReadBytes(signatures.Max(m => m.Length));
+            var headerBytes = binaryReader.ReadBytes(signatures.Max(m => m.Length));
 
             var result = signatures.Any(signature => headerBytes.Take(signature.Length).SequenceEqual(signature));
 
-            if (result) return true;
-            {
-                var signatureValues = FileSignatures.Values.SelectMany(signature => signature);
+            if (result)
+                return true;
 
-                foreach (var signatureValue in signatureValues)
-                {
-                    result = signatureValue.SequenceEqual(headerBytes);
-                    if (result)
-                        return true;
-                }
+            var signatureValues = FileSignatures.Values.SelectMany(signature => signature);
+
+            foreach (var signatureValue in signatureValues)
+            {
+                result = signatureValue.SequenceEqual(headerBytes);
+                if (result)
+                    return true;
             }
 
             return false;

@@ -61,18 +61,16 @@ namespace AmazonWebServices.Services
 
         public async Task SendSmtpEMail(Requests.SendSmtpEmailRequest sendEmailRequest)
         {
-            var networkCredential = new NetworkCredential
-            {
-                UserName = _amazonSesOptions.SmtpOptions.Username,
-                Password = _amazonSesOptions.SmtpOptions.Password
-            };
-
             var client = new SmtpClient
             {
                 Port = 587,
                 EnableSsl = true,
                 Host = _amazonSesOptions.SmtpOptions.Host,
-                Credentials = networkCredential
+                Credentials = new NetworkCredential
+                {
+                    UserName = _amazonSesOptions.SmtpOptions.Username,
+                    Password = _amazonSesOptions.SmtpOptions.Password
+                }
             };
 
             var mailMessage = new MailMessage
