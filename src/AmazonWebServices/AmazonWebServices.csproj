@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <PackageId>AmazonWebServices</PackageId>
     <Title>Amazon Web Services</Title>
-    <Version>1.0.3</Version>
+    <Version>1.0.3.1</Version>
     <Authors>Barış Yerlikaya</Authors>
     <Company>Barış Yerlikaya</Company>
     <Product>Amazon Web Services</Product>
@@ -29,10 +29,10 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <PackageReference Include="AWSSDK.S3" Version="3.7.205.3" />
-    <PackageReference Include="AWSSDK.SimpleEmail" Version="3.7.200.48" />
+    <PackageReference Include="AWSSDK.S3" Version="3.7.205.9" />
+    <PackageReference Include="AWSSDK.SimpleEmail" Version="3.7.200.53" />
     <PackageReference Include="CsQuery.NETStandard" Version="1.3.6.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.34" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>

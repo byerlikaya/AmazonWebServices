@@ -40,8 +40,12 @@ namespace AmazonWebServices.Services
             uploadObjectRequest.File.Verify();
 
             var (folderName, fileName) = GetFolderAndFileName(uploadObjectRequest, addTimeStamp);
-
+#if NETSTANDARD2_0
+            using var newMemoryStream = new MemoryStream();
+#endif
+#if NETSTANDARD2_1
             await using var newMemoryStream = new MemoryStream();
+#endif
             await uploadObjectRequest.File.CopyToAsync(newMemoryStream);
 
             var uploadRequest = new TransferUtilityUploadRequest
