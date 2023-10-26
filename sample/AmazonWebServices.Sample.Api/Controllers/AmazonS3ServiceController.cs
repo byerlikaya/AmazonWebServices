@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace AmazonWebServices.Sample.Api.Controllers
 {
     [ApiController]
-    public class AmazonS3Service : ControllerBase
+    public class AmazonS3ServiceController : ControllerBase
     {
         private readonly IAmazonS3Service _amazonS3Service;
 
-        public AmazonS3Service(IAmazonS3Service amazonS3Service)
+        public AmazonS3ServiceController(IAmazonS3Service amazonS3Service)
         {
             _amazonS3Service = amazonS3Service;
         }

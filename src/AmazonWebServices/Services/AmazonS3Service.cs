@@ -106,6 +106,6 @@ namespace AmazonWebServices.Services
         private static string GetUploadedFileName(UploadObjectRequest uploadObjectRequest, string folderName, string fileName) =>
             string.IsNullOrEmpty(uploadObjectRequest.FolderName)
                 ? fileName
-                : $"{uploadObjectRequest.FolderName}/{folderName}";
+                : $"{uploadObjectRequest.FolderName}/{fileName}";
     }
 }
