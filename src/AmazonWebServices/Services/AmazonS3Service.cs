@@ -1,4 +1,7 @@
-﻿using Amazon;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
@@ -9,9 +12,6 @@ using AmazonWebServices.Requests;
 using AmazonWebServices.Utilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace AmazonWebServices.Services
 {
@@ -41,7 +41,12 @@ namespace AmazonWebServices.Services
 
             var (folderName, fileName) = GetFolderAndFileName(uploadObjectRequest, addTimeStamp);
 
-            await using var newMemoryStream = new MemoryStream();
+#if NETSTANDARD2_0
+            using var newMemoryStream = new MemoryStream();
+#endif
+#if NETSTANDARD2_1
+            await using var newMemoryStream = new MemoryStream();	           
+#endif
             await uploadObjectRequest.File.CopyToAsync(newMemoryStream);
 
             var uploadRequest = new TransferUtilityUploadRequest
@@ -102,6 +107,6 @@ namespace AmazonWebServices.Services
         private static string GetUploadedFileName(UploadObjectRequest uploadObjectRequest, string folderName, string fileName) =>
             string.IsNullOrEmpty(uploadObjectRequest.FolderName)
                 ? fileName
-                : $"{uploadObjectRequest.FolderName}/{folderName}";
+                : $"{uploadObjectRequest.FolderName}/{fileName}";
     }
 }
