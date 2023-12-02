@@ -1,8 +1,7 @@
-﻿namespace AmazonWebServices.Options
+﻿namespace AmazonWebServices.Options;
+
+internal class AmazonCredentialOptions
 {
-    internal class AmazonCredentialOptions
-    {
-        public string AccessKey { get; set; }
-        public string SecretKey { get; set; }
-    }
+    public string AccessKey { get; set; }
+    public string SecretKey { get; set; }
 }

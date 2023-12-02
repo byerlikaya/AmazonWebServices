@@ -1,7 +1,6 @@
-﻿namespace AmazonWebServices.Options
+﻿namespace AmazonWebServices.Options;
+
+internal class AmazonS3Options
 {
-    internal class AmazonS3Options
-    {
-        public string BucketName { get; set; }
-    }
+    public string BucketName { get; set; }
 }

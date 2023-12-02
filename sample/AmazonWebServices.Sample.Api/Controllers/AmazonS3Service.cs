@@ -1,8 +1,4 @@
-﻿using AmazonWebServices.Interfaces;
-using AmazonWebServices.Requests;
-using Microsoft.AspNetCore.Mvc;
-
-namespace AmazonWebServices.Sample.Api.Controllers
+﻿namespace AmazonWebServices.Sample.Api.Controllers
 {
     [ApiController]
     public class AmazonS3Service : ControllerBase

@@ -1,12 +1,8 @@
-﻿using AmazonWebServices.Requests;
-using System.Threading.Tasks;
+﻿namespace AmazonWebServices.Interfaces;
 
-namespace AmazonWebServices.Interfaces
+public interface IAmazonSesService
 {
-    public interface IAmazonSesService
-    {
-        Task SendEMail(SendEmailRequest sendEmailRequest);
+    Task SendEMail(Amazon.SimpleEmail.Model.SendEmailRequest sendEmailRequest);
 
-        Task SendSmtpEMail(SendSmtpEmailRequest sendEmailRequest);
-    }
+    Task SendSmtpEMail(SendSmtpEmailRequest sendEmailRequest);
 }

@@ -1,9 +1,6 @@
-﻿using System.Net.Mail;
+﻿namespace AmazonWebServices.Requests;
 
-namespace AmazonWebServices.Requests
+public class SendSmtpEmailRequest : SendEmailRequest
 {
-    public class SendSmtpEmailRequest : SendEmailRequest
-    {
-        public AttachmentCollection Attachments { get; set; } = new MailMessage().Attachments;
-    }
+    public AttachmentCollection Attachments { get; set; } = new MailMessage().Attachments;
 }

@@ -1,12 +1,8 @@
-﻿using AmazonWebServices.Requests;
-using System.Threading.Tasks;
+﻿namespace AmazonWebServices.Interfaces;
 
-namespace AmazonWebServices.Interfaces
+public interface IAmazonS3Service
 {
-    public interface IAmazonS3Service
-    {
-        Task<string> UploadAsync(UploadObjectRequest updaObjectRequest, bool addTimeStamp = false);
+    Task<string> UploadAsync(UploadObjectRequest updaObjectRequest, bool addTimeStamp = false);
 
-        Task DeleteAsync(string fileName, string folderName = null);
-    }
+    Task DeleteAsync(string fileName, string folderName = null);
 }

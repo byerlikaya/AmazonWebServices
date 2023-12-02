@@ -1,16 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿namespace AmazonWebServices.Utilities;
 
-namespace AmazonWebServices.Utilities
+internal class ServiceTool
 {
-    internal class ServiceTool
-    {
-        public static IServiceProvider ServiceProvider { get; set; }
+    public static IServiceProvider ServiceProvider { get; set; }
 
-        public static IServiceCollection Create(IServiceCollection services)
-        {
-            ServiceProvider = services.BuildServiceProvider();
-            return services;
-        }
+    public static IServiceCollection Create(IServiceCollection services)
+    {
+        ServiceProvider = services.BuildServiceProvider();
+        return services;
     }
 }
