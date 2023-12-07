@@ -8,7 +8,7 @@ public class AmazonSesServiceController(IAmazonSesService amazonSesService) : Co
     [Consumes("application/json")]
     [Produces("application/json", "text/plain")]
     [HttpPost("/sendEmail")]
-    public async Task<IActionResult> SendEmail(Amazon.SimpleEmail.Model.SendEmailRequest sendEmailRequest)
+    public async Task<IActionResult> SendEmail(SendEmailRequest sendEmailRequest)
     {
         await _amazonSesService.SendEMail(sendEmailRequest);
 

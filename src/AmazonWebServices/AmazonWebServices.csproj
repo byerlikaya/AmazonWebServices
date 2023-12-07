@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <PackageId>AmazonWebServices</PackageId>
     <Title>Amazon Web Services</Title>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Authors>Barış Yerlikaya</Authors>
     <Company>Barış Yerlikaya</Company>
     <Product>Amazon Web Services</Product>

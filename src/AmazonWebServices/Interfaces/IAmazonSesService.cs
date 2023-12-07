@@ -2,7 +2,7 @@
 
 public interface IAmazonSesService
 {
-    Task SendEMail(Amazon.SimpleEmail.Model.SendEmailRequest sendEmailRequest);
+    Task SendEMail(Requests.SendEmailRequest sendEmailRequest);
 
     Task SendSmtpEMail(SendSmtpEmailRequest sendEmailRequest);
 }

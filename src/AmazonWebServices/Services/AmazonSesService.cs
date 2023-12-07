@@ -44,12 +44,7 @@ internal class AmazonSesService : IAmazonSesService
         await client.SendEmailAsync(sendRequest);
     }
 
-    public Task SendEMail(Amazon.SimpleEmail.Model.SendEmailRequest sendEmailRequest)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task SendSmtpEMail(Requests.SendSmtpEmailRequest sendEmailRequest)
+    public async Task SendSmtpEMail(SendSmtpEmailRequest sendEmailRequest)
     {
         var client = new SmtpClient
         {
