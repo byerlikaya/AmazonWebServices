@@ -29,7 +29,8 @@ builder.Services.AddAmazonWebServices();
   },
 
   "AmazonS3Options": {
-    "BucketName": ""
+    "BucketName": "",
+    "Region": "eu-central-1"
   },
 
   "AmazonSESOptions": {
@@ -44,7 +45,7 @@ builder.Services.AddAmazonWebServices();
 
 4. And start using it. And that's it.
 
-`To upload and delete files to Amazon S3. It currently supports these extensions: ".jpeg", ".jpg", ".png", ".pdf", ".svg".`
+`To upload and delete files to Amazon S3. "UploadObjectRequest" only supports these extensions: ".jpeg", ".jpg", ".png", ".pdf", ".svg".`
 
 ```csharp
 [ApiController]
@@ -59,7 +60,7 @@ public class AmazonS3Service : ControllerBase
 
     [Consumes("multipart/form-data")]
     [Produces("multipart/form-data", "application/json")]
-    [HttpPost("upload")]
+    [HttpPost("upload-object")]
     public async Task<IActionResult> Upload([FromForm] IFormFile file, [FromQuery] string folderName, [FromQuery] string fileName)
     {
         var uploadedFileName = await _amazonS3Service.UploadAsync(new UploadObjectRequest
@@ -69,6 +70,20 @@ public class AmazonS3Service : ControllerBase
             FolderName = folderName
         });
         return Ok(uploadedFileName);
+    }
+
+    [Consumes("application/json")]
+    [Produces("application/json", "text/plain")]
+    [HttpPost("upload")]
+    public async Task<IActionResult> Upload([FromQuery] string filePath, [FromQuery] string folderName, [FromQuery]  string fileName)
+    {
+        var uploadedFileName = await _amazonS3Service.UploadAsync(new UploadRequest
+        {
+            FilePath = filePath,
+            FileName = fileName,
+            FolderName = folderName
+        });
+       return Ok(uploadedFileName);
     }
 
     [Consumes("application/json")]
