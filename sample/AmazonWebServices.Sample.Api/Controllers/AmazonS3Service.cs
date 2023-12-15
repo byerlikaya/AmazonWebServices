@@ -12,12 +12,27 @@
 
         [Consumes("multipart/form-data")]
         [Produces("multipart/form-data", "application/json")]
-        [HttpPost("upload")]
+        [HttpPost("upload-object")]
         public async Task<IActionResult> Upload([FromForm] IFormFile file, [FromQuery] string folderName, [FromQuery] string fileName)
         {
             var uploadedFileName = await _amazonS3Service.UploadAsync(new UploadObjectRequest
             {
                 File = file,
+                FileName = fileName,
+                FolderName = folderName
+            });
+
+            return Ok(uploadedFileName);
+        }
+
+        [Consumes("application/json")]
+        [Produces("application/json", "text/plain")]
+        [HttpPost("upload")]
+        public async Task<IActionResult> Upload([FromQuery] string filePath, [FromQuery] string folderName, [FromQuery] string fileName)
+        {
+            var uploadedFileName = await _amazonS3Service.UploadAsync(new UploadRequest
+            {
+                FilePath = filePath,
                 FileName = fileName,
                 FolderName = folderName
             });
