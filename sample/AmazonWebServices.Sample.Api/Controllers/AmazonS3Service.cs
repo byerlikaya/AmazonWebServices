@@ -42,6 +42,23 @@
 
         [Consumes("application/json")]
         [Produces("application/json", "text/plain")]
+        [HttpPost("upload-external")]
+        public async Task<IActionResult> Upload(UploadExternalAwsRequest request)
+        {
+            var uploadedFileName = await _amazonS3Service.UploadExternalAwsAsync(new UploadExternalAwsRequest
+            {
+                FilePath = request.FilePath,
+                FileName = request.FileName,
+                FolderName = request.FolderName,
+                AmazonS3Options = request.AmazonS3Options,
+                AmazonCredentialOptions = request.AmazonCredentialOptions
+            });
+
+            return Ok(uploadedFileName);
+        }
+
+        [Consumes("application/json")]
+        [Produces("application/json", "text/plain")]
         [HttpPost("delete")]
         public async Task<IActionResult> Delete([FromQuery] string folderName, [FromQuery] string fileName)
         {
