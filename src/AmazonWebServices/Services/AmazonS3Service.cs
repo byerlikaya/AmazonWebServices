@@ -15,7 +15,8 @@ internal class AmazonS3Service : IAmazonS3Service
             .GetSection(nameof(AmazonS3Options))
             .Get<AmazonS3Options>();
 
-        _amazonS3Client = new AmazonS3Client(awsCredenatial.AccessKey, awsCredenatial.SecretKey, RegionEndpoint.GetBySystemName(_amazonS3Options.Region));
+        if (_amazonS3Options is not null)
+            _amazonS3Client = new AmazonS3Client(awsCredenatial.AccessKey, awsCredenatial.SecretKey, RegionEndpoint.GetBySystemName(_amazonS3Options.Region));
     }
 
     public async Task<string> UploadAsync(UploadObjectRequest uploadObjectRequest)
@@ -58,6 +59,29 @@ internal class AmazonS3Service : IAmazonS3Service
 
         return GetUploadedFileName(uploadRequest, fileName);
     }
+
+    public async Task<string> UploadExternalAwsAsync(UploadExternalAwsRequest uploadRequest)
+    {
+        var (folderName, fileName) = GetFolderAndFileName(uploadRequest);
+
+        var transferUtilityUploadRequest = new TransferUtilityUploadRequest
+        {
+            Key = GetKey(folderName, fileName),
+            BucketName = uploadRequest.AmazonS3Options.BucketName,
+            CannedACL = S3CannedACL.PublicRead,
+            InputStream = new FileStream(uploadRequest.FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+        };
+
+        var amazonS3Client = CreateAmazonS3Client(uploadRequest);
+
+        using var fileTransferUtility = new TransferUtility(amazonS3Client);
+        await fileTransferUtility.UploadAsync(transferUtilityUploadRequest);
+
+        return GetUploadedFileName(uploadRequest, fileName);
+    }
+
+    private static AmazonS3Client CreateAmazonS3Client(UploadExternalAwsRequest uploadRequest) =>
+        new(uploadRequest.AmazonCredentialOptions.AccessKey, uploadRequest.AmazonCredentialOptions.SecretKey, RegionEndpoint.GetBySystemName(uploadRequest.AmazonS3Options.Region));
 
     public async Task DeleteAsync(string fileName, string folderName = null) =>
         await _amazonS3Client.DeleteObjectAsync(new DeleteObjectRequest

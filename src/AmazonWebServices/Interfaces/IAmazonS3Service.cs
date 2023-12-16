@@ -6,5 +6,7 @@ public interface IAmazonS3Service
 
     Task<string> UploadAsync(UploadRequest uploadRequest);
 
+    Task<string> UploadExternalAwsAsync(UploadExternalAwsRequest uploadRequest);
+
     Task DeleteAsync(string fileName, string folderName = null);
 }
