@@ -13,6 +13,7 @@ public class SendEmailRequest
     public string Body { get; set; }
 }
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public class Destination
 {
     public List<string> ToAddresses { get; set; }
