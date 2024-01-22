@@ -45,7 +45,7 @@ builder.Services.AddAmazonWebServices();
 
 4. And start using it. And that's it.
 
-`To upload and delete files to Amazon S3. "UploadObjectRequest" only supports these extensions: ".jpeg", ".jpg", ".png", ".pdf", ".svg".`
+`To upload and delete files to Amazon S3. "UploadObjectRequest" only supports these extensions: ".jpeg", ".jpg", ".png", ".pdf", ".svg", ".webp".`
 
 ```csharp
 [ApiController]
