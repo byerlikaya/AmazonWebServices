@@ -1,16 +1,15 @@
 namespace AmazonWebServices.Sample.Api.Controllers;
 
 [ApiController]
+// ReSharper disable once HollowTypeName
 public class AmazonSesServiceController(IAmazonSesService amazonSesService) : ControllerBase
 {
-    private readonly IAmazonSesService _amazonSesService = amazonSesService;
-
     [Consumes("application/json")]
     [Produces("application/json", "text/plain")]
     [HttpPost("/sendEmail")]
     public async Task<IActionResult> SendEmail(SendEmailRequest sendEmailRequest)
     {
-        await _amazonSesService.SendEMail(sendEmailRequest);
+        await amazonSesService.SendEMail(sendEmailRequest);
 
         return Ok();
     }
@@ -20,7 +19,7 @@ public class AmazonSesServiceController(IAmazonSesService amazonSesService) : Co
     [HttpPost("/sendSmtpEmail")]
     public async Task<IActionResult> SendSmtpEmail(SendSmtpEmailRequest sendSmtpEmailRequest)
     {
-        await _amazonSesService.SendSmtpEMail(sendSmtpEmailRequest);
+        await amazonSesService.SendSmtpEMail(sendSmtpEmailRequest);
 
         return Ok();
     }
