@@ -110,7 +110,6 @@ public class AmazonSesServiceController : ControllerBase
         _amazonSesService = amazonSesService;
     }
 
-
     [Consumes("application/json")]
     [Produces("application/json", "text/plain")]
     [HttpPost("/sendEmail")]
