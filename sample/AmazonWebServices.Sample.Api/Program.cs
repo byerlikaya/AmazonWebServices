@@ -1,6 +1,3 @@
-using AmazonWebServices.Extensions;
-using AmazonWebServices.Sample.Api;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
