@@ -1,8 +1,6 @@
-﻿using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
+﻿namespace AmazonWebServices.Sample.Api;
 
-namespace AmazonWebServices.Sample.Api;
-
+// ReSharper disable once ClassNeverInstantiated.Global
 public class FileUploadOperationFilter : IOperationFilter
 {
     /// <summary>
@@ -10,16 +8,20 @@ public class FileUploadOperationFilter : IOperationFilter
     /// </summary>
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
-        const string fileUploadMime = "multipart/form-data";
-        if (operation.RequestBody == null || !operation.RequestBody.Content.Any(x => x.Key.Equals(fileUploadMime, StringComparison.InvariantCultureIgnoreCase)))
+        if (RequestBodyControl(operation.RequestBody))
             return;
 
-        var fileParams = context.MethodInfo.GetParameters().Where(p => p.ParameterType == typeof(IFormFile));
-        operation.RequestBody.Content[fileUploadMime].Schema.Properties =
-            fileParams.ToDictionary(k => k.Name, _ => new OpenApiSchema()
+        operation.RequestBody.Content["multipart/form-data"].Schema.Properties = context.MethodInfo
+            .GetParameters()
+            .Where(p => p.ParameterType == typeof(IFormFile))
+            .ToDictionary(k => k.Name, _ => new OpenApiSchema
             {
                 Type = "string",
                 Format = "binary"
             });
     }
+
+    private static bool RequestBodyControl(
+        OpenApiRequestBody requestBody) =>
+        requestBody == null || !requestBody.Content.Any(x => x.Key.Equals("multipart/form-data", StringComparison.InvariantCultureIgnoreCase));
 }
